@@ -2,7 +2,7 @@
 @section('content')
 <ul>
     @foreach($users as $user)
-    <li>{{ $user->name }}</li>
+    <li>{{ $user->name }} / {{ $user->position->name }}</li>
     @endforeach
 </ul>
 @endsection
