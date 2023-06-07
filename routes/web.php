@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\GamesController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\UserGameController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController as ProfileOfAdminController;
 
@@ -51,8 +52,10 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::get('/games', [GamesController::class, 'index'])->name('games.index');
         Route::get('/games/create', [GamesController::class, 'create'])->name('games.create');
         Route::post('/games/store', [GamesController::class, 'store'])->name('games.store');
+        Route::get('/games/{id}', [GamesController::class, 'show'])->name('games.show');
         
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        Route::post('/games/{id}/submit', [UserGameController::class, 'store'])->name('game.submit');         
     });
 
     require __DIR__.'/admin.php';

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Game;
+use App\Models\Position;
 
 class GamesController extends Controller
 {
@@ -33,5 +34,12 @@ class GamesController extends Controller
         // User::create(['name' => $request->name, 'email' => $request->email, 'password' => Hash::make($request->password), 'position' => $request->position_id]);
         
         return redirect('admin/dashboard');
+    }
+    
+    public function show(Request $request, $id){
+        // dd($id);
+        $game = Game::find($id);
+        $positions = Position::all();
+        return view('admin.games.show', compact('game', 'positions'));
     }
 }
