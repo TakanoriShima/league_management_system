@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\Admin\GamesController;
+use App\Http\Controllers\Admin\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController as ProfileOfAdminController;
 
@@ -34,7 +36,7 @@ require __DIR__.'/auth.php';
 
 Route::prefix('admin')->name('admin.')->group(function(){
     Route::get('/dashboard', function () {
-        return view('admin.dashboard');
+        return redirect('admin/dashboard');
     })->middleware(['auth:admin', 'verified'])->name('dashboard');
 
     Route::middleware('auth:admin')->group(function () {
@@ -45,6 +47,12 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::get('/users', [UsersController::class, 'index'])->name('users.index');
         Route::get('/users/create', [UsersController::class, 'create'])->name('users.create');
         Route::post('/users/store', [UsersController::class, 'store'])->name('users.store');
+        
+        Route::get('/games', [GamesController::class, 'index'])->name('games.index');
+        Route::get('/games/create', [GamesController::class, 'create'])->name('games.create');
+        Route::post('/games/store', [GamesController::class, 'store'])->name('games.store');
+        
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     });
 
     require __DIR__.'/admin.php';

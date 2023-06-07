@@ -14,4 +14,28 @@
     @else
     @endif
     <a href="{{ route('admin.users.create') }}">選手登録</a>
+    <a href="{{ route('admin.games.create') }}">試合登録</a>
+    
+    <table class="table table-zebra w-full">
+        <thead>
+            <tr>
+                <th class="text-center">日にち</th>
+                <th class="text-center">時間</th>
+                <th class="text-center">対戦チーム</th>
+                <th class="text-center">場所</th>
+                <th class="text-center">メモ</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($games as $game)
+            <tr>
+                <th class="text-center">{{ $game->day }}</th>
+                <td class="text-center">{{ $game->time }}</td>
+                <td class="text-center">{{ $game->battleteam }}</td>
+                <td class="text-center">{{ $game->place }}</td>
+                <td class="text-center">{{ $game->memo }}</td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
 @endsection

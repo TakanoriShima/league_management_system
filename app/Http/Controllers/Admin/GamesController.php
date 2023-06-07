@@ -4,32 +4,30 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\User;
-use App\Models\Position;
-use Illuminate\Support\Facades\Hash;
+use App\Models\Game;
 
-class UsersController extends Controller
+class GamesController extends Controller
 {
-    public function index(){
-        $users = User::all();
-        return view('admin.users.index', compact('users'));
-    }
+    // public function index(){
+    //     $games = Game::all();
+    //     return view('admin.games.index', compact('games'));
+    // }
     
     public function create(Request $request){
         // dd('koko');
-        $positions = Position::all();
-        $user = new User();
-        return view('admin.users.create', compact('positions', 'user')); 
+        $game = new Game();
+        return view('admin.games.create', compact('game')); 
     }
     
     public function store(Request $request){
         // dd($request);
-        $user = new User;
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $user->position_id = $request->position_id;
-        $user->save();
+        $game = new Game;
+        $game->day = $request->day;
+        $game->time = $request->time;
+        $game->battleteam = $request->battleteam;
+        $game->place = $request->place;
+        $game->memo = $request->memo;
+        $game->save();
         // dd($user);
         // User::create(['name' => $request->name, 'email' => $request->email, 'password' => Hash::make($request->password), 'position' => $request->position_id]);
         // User::create(['name' => $request->name, 'email' => $request->email, 'password' => Hash::make($request->password), 'position' => $request->position_id]);
