@@ -88,7 +88,7 @@ class PositionSeeder extends Seeder
         ]);
         DB::table('positions')->insert([
             [
-                'name' => 'ST（ストライカー））',
+                'name' => 'ST（ストライカー）',
             ],
         ]);
     }
