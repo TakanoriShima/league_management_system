@@ -36,4 +36,11 @@ class UsersController extends Controller
         
         return redirect('admin/dashboard');
     }
+    
+    public function show(Request $request, $id){
+        // dd($id);
+        $user = User::find($id);
+        $games = $user->games()->get();
+        return view('admin.users.show', compact('user', 'games'));
+    }
 }

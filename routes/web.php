@@ -58,6 +58,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
         
         Route::get('/users', [UsersController::class, 'index'])->name('users.index');
         Route::get('/users/create', [UsersController::class, 'create'])->name('users.create');
+        Route::get('/users/{id}', [UsersController::class, 'show'])->name('users.show');
         Route::post('/users/store', [UsersController::class, 'store'])->name('users.store');
         
         Route::get('/games', [GamesController::class, 'index'])->name('games.index');
