@@ -12,7 +12,6 @@
         </div>
     </div>
     @else
-    @endif
     <a href="{{ route('admin.users.create') }}">選手登録</a>
     <a href="{{ route('admin.games.create') }}">試合登録</a>
     
@@ -40,4 +39,5 @@
             @endforeach
         </tbody>
     </table>
+    @endif
 @endsection

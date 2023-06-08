@@ -37,22 +37,6 @@
         </tbody>
     </table>
     
-     <form action="{{ route('admin.game.submit', $game->id)}}" method="POST">
-        @csrf
-        <div class="flex gap-2 mb-4">
-            <div class="form-control items-center">
-                <label for="present" class="label cursor-pointer">
-                    <input type="radio" name="status" id="present" value="1" class="radio" checked>
-                    <span class="label-text">参加</span>
-                </label>
-            </div>
-            <div class="form-control items-center">
-                <label for="absent" class="label cursor-pointer">
-                    <input type="radio" name="status" id="absent" value="0" class="radio">
-                    <span class="label-text">不参加</span>
-                </label>
-            </div>
-        </div>
-        <button type="submit" class="btn btn-primary btn-block normal-case">登録</button>
+
     </form>
 @endsection

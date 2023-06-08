@@ -3,7 +3,9 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\GamesController;
+use App\Http\Controllers\GamesController as UserGamesController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\DashboardController as UserDashboardController;
 use App\Http\Controllers\UserGameController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController as ProfileOfAdminController;
@@ -23,14 +25,21 @@ Route::get('/', function () {
     return view('dashboard');
 });
 
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
+
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return redirect('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/dashboard', [UserDashboardController::class, 'index'])->name('dashboard');
+    Route::get('/games/{id}', [UserGamesController::class, 'show'])->name('games.show');
+    Route::post('/games/{id}/submit', [UserGameController::class, 'store'])->name('game.submit'); 
 });
 
 require __DIR__.'/auth.php';
@@ -55,7 +64,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::get('/games/{id}', [GamesController::class, 'show'])->name('games.show');
         
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-        Route::post('/games/{id}/submit', [UserGameController::class, 'store'])->name('game.submit');         
+                
     });
 
     require __DIR__.'/admin.php';
