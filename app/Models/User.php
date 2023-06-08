@@ -94,5 +94,9 @@ class User extends Authenticatable
     {
         return $this->games()->where('game_id', $gameId)->exists();
     }
+    
+    public function is_done($gameId){
+        return $this->games()->where('game_id', $gameId)->where('status', 2)->exists();
+    }
 
 }

@@ -42,4 +42,6 @@ class GamesController extends Controller
         $positions = Position::all();
         return view('games.show', compact('game', 'positions'));
     }
+    
+
 }

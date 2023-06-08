@@ -40,6 +40,9 @@ class GamesController extends Controller
         // dd($id);
         $game = Game::find($id);
         $positions = Position::all();
-        return view('admin.games.show', compact('game', 'positions'));
+        $users = $game->users()->where('status', '>=', 1)->get();
+        return view('admin.games.show', compact('game', 'positions', 'users'));
     }
+    
+
 }

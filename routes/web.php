@@ -7,6 +7,7 @@ use App\Http\Controllers\GamesController as UserGamesController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\DashboardController as UserDashboardController;
 use App\Http\Controllers\UserGameController;
+use App\Http\Controllers\Admin\UserGameController as AdminUserGameController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController as ProfileOfAdminController;
 
@@ -40,6 +41,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [UserDashboardController::class, 'index'])->name('dashboard');
     Route::get('/games/{id}', [UserGamesController::class, 'show'])->name('games.show');
     Route::post('/games/{id}/submit', [UserGameController::class, 'store'])->name('game.submit'); 
+    
 });
 
 require __DIR__.'/auth.php';
@@ -64,6 +66,8 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::get('/games/{id}', [GamesController::class, 'show'])->name('games.show');
         
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        
+        Route::put('/games/{id}', [AdminUserGameController::class, 'update'])->name('games.update');
                 
     });
 

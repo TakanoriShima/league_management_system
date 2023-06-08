@@ -12,8 +12,6 @@
         </div>
     </div>
     @else
-    @endif
-    
     <table class="table table-zebra w-full">
         <thead>
             <tr>
@@ -37,6 +35,48 @@
         </tbody>
     </table>
     
+    <div class="prose mx-auto text-center">
+        <h2>スタメン決定</h2>
+    </div>
+    
+    <table class="table table-zebra w-full">
+        <thead>
+            <tr>
+                <th class="text-center">名前</th>
+                <th class="text-center">ポジション</th>
+                <th class="text-center"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($users as $user)
+            <tr>
+                <td class="text-center">{{ $user->name }}</td>
+                @if(!$user->is_done($game->id))
+                <form action="{{ route('admin.games.update', $game->id) }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="_method" value="put">
+                    <input type="hidden" name="user_id" value="{{ $user->id }}">
+                    <td class="text-center">
+                        <select name="position_id">
+                            @foreach($positions as $position)
+                            <option value="{{ $position->id}}" {{ $user->position_name($game->id) == $position->name ? 'selected' : ''}}>{{ $position->name }}</option>
+                            @endforeach
+                        </select>
+                    </td>
+                    <td><button type="submit" class="text-center btn btn-primary btn-block normal-case">決定</button></td>
+                </form>
+                @else
+                <td class="text-left">{{ $user->position_name($game->id) }}<td>
+                <td>決定済み</td>
+                @endif
+            </tr>
+            @endforeach
+            
+        </tbody>
+    </table>
+
 
     </form>
+    @endif
+    
 @endsection
