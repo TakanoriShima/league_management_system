@@ -30,7 +30,7 @@
         </form>
     </div>
     @else
-    <a href="{{ route('admin.users.create') }}">プロフィール登録</a>
+    <a href="{{ route('users.edit', $user->id) }}">プロフィール編集</a>
     
     <table class="table table-zebra w-full">
         <thead>

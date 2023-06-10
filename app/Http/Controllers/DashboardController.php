@@ -10,6 +10,7 @@ class DashboardController extends Controller
 {
     public function index(){
         $games = Game::all();
-        return view('dashboard', compact('games'));
+        $user = \Auth::user();
+        return view('dashboard', compact('games', 'user'));
     }
 }

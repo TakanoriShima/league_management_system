@@ -38,9 +38,9 @@ class GamesController extends Controller
     
     public function show(Request $request, $id){
         // dd($id);
+        $user = \Auth::user();
         $game = Game::find($id);
-        $positions = Position::all();
-        return view('games.show', compact('game', 'positions'));
+        return view('games.show', compact('game', 'user'));
     }
     
 

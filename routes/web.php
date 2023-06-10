@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UsersController as UserUsersController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\GamesController;
 use App\Http\Controllers\GamesController as UserGamesController;
@@ -35,9 +36,12 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::get('/users/{id}/edit', [UserUsersController::class, 'edit'])->name('users.edit');
+    Route::put('/users/{id}/update', [UserUsersController::class, 'update'])->name('users.update');
+    Route::get('/users/{id}', [UserUsersController::class, 'show'])->name('users.show');
+    // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/dashboard', [UserDashboardController::class, 'index'])->name('dashboard');
     Route::get('/games/{id}', [UserGamesController::class, 'show'])->name('games.show');
     Route::post('/games/{id}/submit', [UserGameController::class, 'store'])->name('game.submit'); 

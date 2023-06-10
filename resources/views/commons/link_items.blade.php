@@ -3,7 +3,7 @@
     <li><a class="link link-hover" href="#">チーム&#39;s profile</a></li>
     
     {{-- ユーザ詳細ページへのリンク --}}
-    <li><a class="link link-hover" href="#">{{ Auth::user()->name }}&#39;s profile</a></li>
+    <li><a class="link link-hover" href="{{ route('users.show', $user->id)}}">{{ Auth::user()->name }}&#39;s profile</a></li>
     
     {{-- ユーザ一覧ページへのリンク --}}
     <li><a class="link link-hover" href="#">member</a></li>

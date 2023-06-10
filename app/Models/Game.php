@@ -24,6 +24,11 @@ class Game extends Model
         return $this->users()->where('user_id', $userId)->where('status', 1)->exists();
     }
     
+    public function is_determined($userId)
+    {
+        return $this->users()->where('user_id', $userId)->where('status', 2)->exists();
+    }
+    
     // public function position($userId){
     //      $user = $this->users()->where('user_id', $userId)->get()->first();
     //      $position_name = Position::find($user->position_id)->get()->first()->name;

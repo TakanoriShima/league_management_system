@@ -12,6 +12,7 @@
         </div>
     </div>
     @else
+    
     <table class="table table-zebra w-full">
         <thead>
             <tr>
@@ -21,6 +22,7 @@
                 <th class="text-center">対戦チーム</th>
                 <th class="text-center">場所</th>
                 <th class="text-center">メモ</th>
+                <th class="text-center">参加者</th>
             </tr>
         </thead>
         <tbody>
@@ -31,9 +33,19 @@
                 <td class="text-center">{{ $game->battleteam }}</td>
                 <td class="text-center">{{ $game->place }}</td>
                 <td class="text-center">{{ $game->memo }}</td>
+                <td class="text-center">
+                    <ul>
+                    @foreach($game->users as $user)
+                        @if($game->is_determined($user->id))
+                        <li>{{ $user->name }} / {{ $user->position_name($game->id)}}</li>
+                        @endif
+                    @endforeach
+                    </ul>
+                </td>
             </tr>
         </tbody>
     </table>
+
     
     <div class="prose mx-auto text-center">
         <h2>スタメン決定</h2>
